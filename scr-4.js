@@ -17,6 +17,21 @@ let hasFlippedCard = false;
 let firstCard, secondCard;
 // * Змінні, значення яких зберігатиму першу та другу перевернуту картку. Тільки оголошуємо, без ініціалізації.
 
+
+const resetButton = document.getElementById('reset-button');
+// Створюємо змінну з кнопкою для перезапуску гри
+
+resetButton.addEventListener('click', () => {
+  // Встановлюємо на кнопку лісенер кліку
+
+  allCards.forEach((card) => card.classList.remove('flip'));
+  // Видаляємо у всіх карток клас 'flip'
+
+  initializeBoard(allCards);
+  // Знову ініціалізуємо дошку, яка розставить картки на інші місця та додасть лісенери кліку на кожну картку
+});
+
+
 // ! Functions
 
 // * Функція, яка скидає значення змінних дошки.
@@ -46,27 +61,32 @@ function unflipCards() {
 
 function actionIfMatch(firstCardFramework, secondCardframework) {
   //Функція як параметри приймає назву фреймворку першої картки та назву фреймворку другої картки.
+
   if (firstCardFramework === secondCardframework) {
     // При збігу назв фреймворків карток виконується блокування карт, при розбіжності - їх переворот у вихідний стан.
+
     disableCards();
     // * виклик функції блокування карт
+
   } else {
     unflipCards();
-    // * виклик функції по перевороту карток у вихідний стан.
+    // * Інакше: виклик функції по перевороту карток у вихідний стан.
   }
 }
 
 // * Функція, яка буде обробником при натисканні на картку.
 function onClickCardHandler(event) {
   // * Як параметр функція приймає об'єкт події
+
   if (firstCard && secondCard) {
     // * Якщо значення в змінних, що зберігають першу та другу картку не пусті
-    console.log('stop1');
+
     return;
     // * - зупиняємо роботу функції.
+
   } else if (this === firstCard) {
     // * Якщо картка, на яку натиснули і значення записане в змінній, яка призначена для зберігання першої перевернутої картки збігаються
-    console.log('stop2');
+
     return;
     // * - зупиняємо роботу функції.
   }
@@ -76,8 +96,10 @@ function onClickCardHandler(event) {
 
   if (!hasFlippedCard) {
     // * Перевіряємо, якщо на дошці ще немає перевернутих карток, то:
+
     hasFlippedCard = true;
     // * - змінюємо значення змінної, яка визначає чи маємо ми перевернуту картку на true
+
     firstCard = this;
     // * - записуємо в змінну, яка призначена для зберігання першої перевернутої картки - картку на яку натиснули та зупиняємо роботу функції
     return;
@@ -111,17 +133,17 @@ function checkBoard() {
   const flippedCards = document.querySelectorAll('.flip');
 
   if (flippedCards.length === CARDS_COUNT) {
-    alert(
-      `Перемога!
-Гра перезапуститься після підтвердження`
-    );
+    alert(`Перемога!`);
+
     setTimeout(() => {
-      flippedCards.forEach((card) => {
-        card.classList.remove('flip');
-        // Видаляємо у всіх карток клас 'flip'
-        initializeBoard(allCards);
-        // Знову ініціалізуємо дошку, яка розставить картки на інші місця та додасть лісенери кліку на кожну картку
-      });
+      if (confirm('Перезапустити гру?') == true) {
+        flippedCards.forEach((card) => {
+          card.classList.remove('flip');
+          // Видаляємо у всіх карток клас 'flip'
+          initializeBoard(allCards);
+          // Знову ініціалізуємо дошку, яка розставить картки на інші місця та додасть лісенери кліку на кожну картку
+        });
+      }
     }, 1000);
   }
 }

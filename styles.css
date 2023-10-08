@@ -1,3 +1,9 @@
+:root {
+  --main-bg-color: #060ab2;
+  --secondary-bg-color: #1c7ccc;
+  --button-bg-color: #fff;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -6,8 +12,11 @@
 
 body {
   height: 100vh;
+  background: var(--main-bg-color);
+}
+
+.container {
   display: flex;
-  background: #060ab2;
 }
 
 .memory-game {
@@ -47,10 +56,38 @@ body {
   padding: 20px;
   position: absolute;
   border-radius: 5px;
-  background: #1c7ccc;
+  background: var(--secondary-bg-color);
   backface-visibility: hidden;
 }
 
 .front-face {
   transform: rotateY(180deg);
+}
+
+.reset-block {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.reset-block button {
+  background-color: var(--button-bg-color);
+  border-color: var(--main-bg-color);
+  border-radius: 8px;
+  color: var(--main-bg-color);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.8rem 1.2rem;
+  user-select: none;
+}
+
+.reset-block button:hover {
+  color: var(--button-bg-color);
+  background-color: var(--secondary-bg-color);
+}
+
+.reset-block button:active {
+  transform: scale(0.9);
 }
