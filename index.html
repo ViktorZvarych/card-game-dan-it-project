@@ -1,20 +1,19 @@
-<!-- The game logic was created by DAN.IT:
-https://dan-it.com/
-
-with my modifications...
-Src code:
-https://github.com/ViktorZvarych/card-game-dan-it-project-->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Card game</title>
-    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <!--
+      The game logic was created by DAN.IT: https://dan-it.com/ 
+      with my modifications))
+      Src code: https://github.com/ViktorZvarych/card-game-dan-it-project
+    -->
+
     <div class="container">
       <section class="memory-game">
         <div class="memory-card" data-framework="aurelia">
@@ -74,7 +73,8 @@ https://github.com/ViktorZvarych/card-game-dan-it-project-->
     </div>
 
     <div class="reset-block">
-      <button id="reset-button" >Перезапустити гру</button>
+      <button id="reset-button">Restart game</button>
+      <button class="score-block">Your score: <span class="score" id="score"></span></button>
     </div>
 
     <script type="module" src="./script.js"></script>

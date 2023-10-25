@@ -1,7 +1,7 @@
 :root {
   --main-bg-color: #060ab2;
   --secondary-bg-color: #1c7ccc;
-  --button-bg-color: #fff;
+  --button-bg-color: #ffffff81;
 }
 
 * {
@@ -12,7 +12,12 @@
 
 body {
   height: 100vh;
-  background: var(--main-bg-color);
+  /* background: var(--main-bg-color); */
+  background-image: url(./img/stormsea.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
 }
 
 .container {
@@ -21,7 +26,7 @@ body {
 
 .memory-game {
   width: 640px;
-  height: 640px;
+  height: 90vh;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
@@ -30,7 +35,7 @@ body {
 
 .memory-card {
   width: calc(25% - 10px);
-  height: calc(33.333% - 10px);
+  /* max-height: calc(33.333% - 10px); */
   margin: 5px;
   position: relative;
   transform: scale(1);
@@ -56,7 +61,10 @@ body {
   padding: 20px;
   position: absolute;
   border-radius: 5px;
-  background: var(--secondary-bg-color);
+  /* background: var(--secondary-bg-color); */
+  background-image: url(./img/raindrops.jpg);
+  box-shadow: 0 6px 24px 0 rgb(101, 111, 250);
+  opacity: 0.9;
   backface-visibility: hidden;
 }
 
@@ -67,12 +75,12 @@ body {
 .reset-block {
   display: flex;
   justify-content: center;
-  margin-top: 0.5rem;
+  margin: 0.8rem;
 }
 
 .reset-block button {
   background-color: var(--button-bg-color);
-  border-color: var(--main-bg-color);
+  border: 1px solid var(--secondary-bg-color);
   border-radius: 8px;
   color: var(--main-bg-color);
   cursor: pointer;
@@ -81,13 +89,23 @@ body {
   font-weight: 600;
   padding: 0.8rem 1.2rem;
   user-select: none;
+  box-shadow: 0 6px 24px 0 rgb(101, 111, 250);
 }
 
 .reset-block button:hover {
-  color: var(--button-bg-color);
+  color: #fff;
   background-color: var(--secondary-bg-color);
+  
 }
 
 .reset-block button:active {
   transform: scale(0.9);
+}
+
+.score-block {
+  margin-left: 5%;
+}
+
+.score {
+  font-size: 1.2rem;
 }

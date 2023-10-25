@@ -15,8 +15,21 @@ let hasFlippedCard = false;
 // * Змінна, значення якої визначає чи маємо перевернуту картку. Ініціалізуємо зі значенням false.
 
 let firstCard, secondCard;
-// * Змінні, значення яких зберігатиму першу та другу перевернуту картку. Тільки оголошуємо, без ініціалізації.
+// * Змінні, значення яких зберігатимуть першу та другу перевернуту картку. Тільки оголошуємо, без ініціалізації.
 
+
+
+const initialScore = 100;
+//Початковий рахунок
+
+let score = initialScore;
+// Поточний ахунок
+
+const scoreSpan = document.getElementById('score');
+// Елемент, який показує рахунок
+
+scoreSpan.innerHTML = score;
+// Висвітлюємо рахунок
 
 const resetButton = document.getElementById('reset-button');
 // Створюємо змінну з кнопкою для перезапуску гри
@@ -29,8 +42,10 @@ resetButton.addEventListener('click', () => {
 
   initializeBoard(allCards);
   // Знову ініціалізуємо дошку, яка розставить картки на інші місця та додасть лісенери кліку на кожну картку
-});
 
+  resetScore();
+  //Скидаємо рахунок до початкового
+});
 
 // ! Functions
 
@@ -42,6 +57,12 @@ function resetBoard() {
   firstCard = null;
   secondCard = null;
   // Змінним значення яких зберігають першу і другу перевернуту карту присвоюємо порожнє значення.
+}
+
+// * Функція для скидання значення рахунку до початкового значення
+function resetScore() {
+  scoreSpan.innerHTML = 100;
+  score = +scoreSpan.innerHTML;
 }
 
 // * Функція, яка через певний час перевертає картки у вихідний стан.
@@ -68,9 +89,41 @@ function actionIfMatch(firstCardFramework, secondCardframework) {
     disableCards();
     // * виклик функції блокування карт
 
+    score += 10;
+    // Додаємо бали
+    scoreSpan.innerHTML = score;
   } else {
     unflipCards();
     // * Інакше: виклик функції по перевороту карток у вихідний стан.
+
+    score -= 15;
+    // Забираємо бали
+    scoreSpan.innerHTML = score;
+
+    if (score < 0) {
+      alert(`
+      You lost!
+      It's not Your  day!
+      `);
+
+      score = 0;
+      scoreSpan.innerHTML = score;
+
+      const flippedCards = document.querySelectorAll('.flip');
+
+      setTimeout(() => {
+        if (confirm('Restart game?') == true) {
+          flippedCards.forEach((card) => {
+            card.classList.remove('flip');
+            // Видаляємо у всіх карток клас 'flip'
+            initializeBoard(allCards);
+            // Знову ініціалізуємо дошку, яка розставить картки на інші місця та додасть лісенери кліку на кожну картку
+            resetScore();
+            //Скидаємо рахунок
+          });
+        }
+      }, 1000);
+    }
   }
 }
 
@@ -83,7 +136,6 @@ function onClickCardHandler(event) {
 
     return;
     // * - зупиняємо роботу функції.
-
   } else if (this === firstCard) {
     // * Якщо картка, на яку натиснули і значення записане в змінній, яка призначена для зберігання першої перевернутої картки збігаються
 
@@ -133,15 +185,21 @@ function checkBoard() {
   const flippedCards = document.querySelectorAll('.flip');
 
   if (flippedCards.length === CARDS_COUNT) {
-    alert(`Перемога!`);
+    alert(`
+    You won!
+    Your score is: ${score}
+    Congratulations!!!
+    `);
 
     setTimeout(() => {
-      if (confirm('Перезапустити гру?') == true) {
+      if (confirm('Restart game?') == true) {
         flippedCards.forEach((card) => {
           card.classList.remove('flip');
           // Видаляємо у всіх карток клас 'flip'
           initializeBoard(allCards);
           // Знову ініціалізуємо дошку, яка розставить картки на інші місця та додасть лісенери кліку на кожну картку
+          resetScore();
+          //Скидаємо рахунок
         });
       }
     }, 1000);
