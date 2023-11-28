@@ -7,3 +7,6 @@ The game logic was created by DAN.IT:
 https://dan-it.com/
 
 with my modifications...
+
+Used instruments:
+-vanilla JS
